@@ -31,18 +31,6 @@ sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 # Add puppet user and group
 # adduser --system --group --home /var/lib/puppet puppet
 
-# Install NFS client
-apt-get -y install nfs-common
-
-# Prime LXC
-apt-get -y install lxc lxc-templates
-
-lxc-create -n seed -t ubuntu -- --release precise
-lxc-destroy -n seed -f
-
-lxc-create -n seed -t ubuntu -- --release trusty
-lxc-destroy -n seed -f
-
 apt-get clean
 
 # Install Ruby from source in /opt so that users of Vagrant
